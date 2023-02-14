@@ -11,7 +11,6 @@ Thresholding:  https://docs.opencv.org/4.x/d7/d4d/tutorial_py_thresholding.html
 Contours:      https://docs.opencv.org/3.4/d4/d73/tutorial_py_contours_begin.html
 """
 
-from dataclasses import dataclass
 import argparse
 
 from icecream import ic
@@ -19,7 +18,7 @@ import numpy as np
 import cv2 as cv
 
 from fps_counter import FPSCounter
-from image_saver import ImageSaver
+from threshold_lib import load_threshold, Threshold
 
 from contour_lib import (
     get_maximum_contour,
@@ -31,33 +30,7 @@ from contour_lib import (
 )
 
 
-@dataclass
-class Threshold:
-    """
-    Holds the lower and upper threshold color values for the objects.
-    I like it this way but we could replace it with just passing static values to `process_object`.
-    """
-
-    lower: np.ndarray
-    upper: np.ndarray
-    
-    def to_json(self):
-        """ Converts the threshold to a JSON serializable object. """
-        return {
-            "lower": self.lower.tolist(),
-            "upper": self.upper.tolist()
-        }
-    
-    @classmethod
-    def from_json(cls, data):
-        """ Converts a JSON object to a threshold. """
-        return cls(
-            lower=np.array(data["lower"]),
-            upper=np.array(data["upper"])
-        )
-
-
-def infinite_frame_stream(save=False, save_folder=""):
+def infinite_frame_stream():
     """
     Returns a generator that yields frames from the webcam.
     Exits the program if the user presses 'q' and waits between frames.
@@ -73,8 +46,6 @@ def infinite_frame_stream(save=False, save_folder=""):
         key = cv.waitKey(1)
         if key & 0xFF == ord("q"):
             exit(0)
-        elif key & 0xFF == ord("s") and save:
-            ImageSaver(save_folder).save(frame)
         yield frame
 
 
@@ -165,14 +136,18 @@ printed_cone_threshold = Threshold(
 
 def main():
     """The main function. Detects the cone in the camera stream."""
-    parser = argparse.ArgumentParser("Shows the camera stream and detects objects based on a threshold value.")
-    # add an option for saving images
-    parser.add_argument("-s", "--save", action="store_true", help="Save images to the images folder when the user presses 's'.")
-    # add argument for the path to save the images
-    parser.add_argument("-p", "--path", type=str, help="The path to save the images to.")
+    
+    # gets the file path from the command line
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-p", "--path", type=str)
     args = parser.parse_args()
     
-    process_object(threshold=printed_cone_threshold, save=args.save, save_folder=args.path)
+    if args.path is None:
+        raise ValueError("Please provide a path to load the threshold from.")
+    
+    threshold = load_threshold(args.path)
+    
+    process_object(threshold=threshold, save=args.save, save_folder=args.path)
 
 
 if __name__ == "__main__":

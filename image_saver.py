@@ -4,6 +4,7 @@ import os.path
 
 import cv2 as cv
 
+from icecream import ic
 
 class ImageSaver:
     """Handles logic for saving files to the test_images folder."""
@@ -17,6 +18,7 @@ class ImageSaver:
         return cls.instance
 
     def __init__(self, folder):
+        ic(folder)
         self.folder = folder
         if not os.path.exists(f"test_images/{self.folder}"):
             os.makedirs(f"test_images/{self.folder}")
