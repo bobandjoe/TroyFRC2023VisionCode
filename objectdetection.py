@@ -145,7 +145,10 @@ def main():
     if args.path is None:
         raise ValueError("Please provide a path to load the threshold from.")
     
-    threshold = load_threshold(args.path)
+    if args.path == "printed_cone":
+        threshold = printed_cone_threshold
+    else:
+        threshold = load_threshold(args.path)
     
     process_object(threshold=threshold)
 

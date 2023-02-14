@@ -59,5 +59,9 @@ def load_threshold(path, image_metadata=None):
 def save_threshold(threshold, path):
     """Saves the threshold to a file."""
     save_path = f"test_data/{path}/threshold.json"
-    with open(save_path, "w", encoding="utf-8") as f:
-        json.dump(threshold.to_json(), f)
+    try:
+        with open(save_path, "w", encoding="utf-8") as f:
+            json.dump(threshold.to_json(), f)  
+    except PermissionError as error:
+        print(error)
+        save_threshold(threshold, path)
