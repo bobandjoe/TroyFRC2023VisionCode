@@ -68,7 +68,7 @@ def get_object(image, threshold):
     return largest_object
 
 
-def process_object(threshold, save=False, save_folder=""):
+def process_object(threshold):
     """
     Given a threshold, this function will process the camera stream
     and detect the object of interest.
@@ -76,7 +76,7 @@ def process_object(threshold, save=False, save_folder=""):
     Args:
         threshold (Threshold): An object with `lower` and `upper` attributes, which are HSV values.
     """
-    for frame in infinite_frame_stream(save=save, save_folder=save_folder):
+    for frame in infinite_frame_stream():
         largest_object = get_object(frame, threshold)
 
         if largest_object is None:
@@ -147,7 +147,7 @@ def main():
     
     threshold = load_threshold(args.path)
     
-    process_object(threshold=threshold, save=args.save, save_folder=args.path)
+    process_object(threshold=threshold)
 
 
 if __name__ == "__main__":

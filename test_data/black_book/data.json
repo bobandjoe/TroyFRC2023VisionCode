@@ -1,0 +1,147 @@
+[
+    {
+        "center_x": 360,
+        "center_y": 335,
+        "image_name": "test_0.jpg"
+    },
+    {
+        "center_x": 507,
+        "center_y": 310,
+        "image_name": "test_1.jpg"
+    },
+    {
+        "center_x": 400,
+        "center_y": 293,
+        "image_name": "test_2.jpg"
+    },
+    {
+        "center_x": 534,
+        "center_y": 351,
+        "image_name": "test_3.jpg"
+    },
+    {
+        "center_x": 478,
+        "center_y": 304,
+        "image_name": "test_4.jpg"
+    },
+    {
+        "center_x": 436,
+        "center_y": 134,
+        "image_name": "test_5.jpg"
+    },
+    {
+        "center_x": 191,
+        "center_y": 302,
+        "image_name": "test_6.jpg"
+    },
+    {
+        "center_x": 475,
+        "center_y": 304,
+        "image_name": "test_7.jpg"
+    },
+    {
+        "center_x": 53,
+        "center_y": 223,
+        "image_name": "test_8.jpg"
+    },
+    {
+        "center_x": 244,
+        "center_y": 249,
+        "image_name": "test_9.jpg"
+    },
+    {
+        "center_x": 381,
+        "center_y": 122,
+        "image_name": "test_10.jpg"
+    },
+    {
+        "center_x": 317,
+        "center_y": 344,
+        "image_name": "test_11.jpg"
+    },
+    {
+        "center_x": 311,
+        "center_y": 268,
+        "image_name": "test_12.jpg"
+    },
+    {
+        "center_x": 340,
+        "center_y": 275,
+        "image_name": "test_13.jpg"
+    },
+    {
+        "center_x": 250,
+        "center_y": 101,
+        "image_name": "test_14.jpg"
+    },
+    {
+        "center_x": 442,
+        "center_y": 202,
+        "image_name": "test_15.jpg"
+    },
+    {
+        "center_x": 486,
+        "center_y": 334,
+        "image_name": "test_16.jpg"
+    },
+    {
+        "center_x": 387,
+        "center_y": 304,
+        "image_name": "test_17.jpg"
+    },
+    {
+        "center_x": 522,
+        "center_y": 353,
+        "image_name": "test_18.jpg"
+    },
+    {
+        "center_x": 425,
+        "center_y": 351,
+        "image_name": "test_19.jpg"
+    },
+    {
+        "center_x": 443,
+        "center_y": 312,
+        "image_name": "test_20.jpg"
+    },
+    {
+        "center_x": 442,
+        "center_y": 250,
+        "image_name": "test_21.jpg"
+    },
+    {
+        "center_x": 439,
+        "center_y": 194,
+        "image_name": "test_22.jpg"
+    },
+    {
+        "center_x": 329,
+        "center_y": 293,
+        "image_name": "test_23.jpg"
+    },
+    {
+        "center_x": 345,
+        "center_y": 274,
+        "image_name": "test_24.jpg"
+    },
+    {
+        "center_x": 385,
+        "center_y": 265,
+        "image_name": "test_25.jpg"
+    },
+    {
+        "center_x": 322,
+        "center_y": 311,
+        "image_name": "test_26.jpg"
+    },
+    {
+        "center_x": 318,
+        "center_y": 308,
+        "image_name": "test_27.jpg"
+    },
+    {
+        "center_x": 336,
+        "center_y": 288,
+        "image_name": "test_28.jpg"
+    }
+]
