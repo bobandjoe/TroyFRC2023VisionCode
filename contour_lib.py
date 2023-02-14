@@ -3,12 +3,25 @@
 import numpy as np
 import cv2 as cv
 
-def get_maximum_contour(contours):
-    """ Returns the contour with the largest area in the list of contours or None if there are no contours. """
-    contours = [
+
+def filter_contours_by_sides(contours, min_sides, max_sides):
+    return filter(
+        lambda contour: min_sides <= get_num_sides(contour) <= max_sides,
+        contours
+    )
+
+
+def filter_contours(contours):
+    """ Returns a list of contours that are within the size range. """
+    return [
         contour for contour in contours \
         if 1_000 < cv.contourArea(contour) < 300_000
     ]
+
+
+def get_maximum_contour(contours):
+    """ Returns the contour with the largest area in the list of contours or None if there are no contours. """
+    contours = filter_contours(contours)
     if len(contours) == 0:
         return None
     return max(contours, key=cv.contourArea)
@@ -58,4 +71,16 @@ def get_farthest_point(contour, center=None):
 def get_orientation(contour, center=None):
     """ Returns the angle of the farthest point from the center of the contour. """
     farthest_point = get_farthest_point(contour, center)
-    return angle(center, farthest_point)
+    return get_angle(center, farthest_point)
+
+
+def draw_contour_points(frame, contour, color=(255, 255, 255), radius=3):
+    """ Draws the points of the contour on the frame. """
+    for point in contour:
+        cv.circle(frame, tuple(point[0]), radius, color, -1)
+
+
+def get_sides(contour, accuracy=0.02):
+    """ Returns the approximate number of sides of the contour. """
+    return cv.approxPolyDP(contour, accuracy * cv.arcLength(contour, True), True)
+
