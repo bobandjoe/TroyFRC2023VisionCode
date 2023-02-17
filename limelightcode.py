@@ -1,3 +1,8 @@
+'''
+LLPython = LimeLight Python array used to relay information to the robot (through limelight) with Network Tables.
+LimeLight docs: https://docs.limelightvision.io/en/latest/
+'''
+
 import cv2 as cv
 from math import atan2, cos, sin, sqrt, pi
 import numpy as np
@@ -40,10 +45,14 @@ def runPipeline(image, llrobot):
                 max_area_contour = c
 
         M = cv.moments(max_area_contour)
-        if not M['m00'] == 0 and len(max_area_contour) > 5:
-            cX = int(M["m10"] / M["m00"])
-            cY = int(M["m01"] / M["m00"])
-
+        '''
+        OpenCV moments/contours docs: https://docs.opencv.org/3.4/dd/d49/tutorial_py_contour_features.html
+        Wikipedia Image Moment info page: https://en.wikipedia.org/wiki/Image_moment
+        '''
+        # find the centroid of the image with calculations of image moments
+        if not M['m00'] == 0 and len(max_area_contour) > 5: #First validate the moment
+            cX = int(M["m10"] / M["m00"]) #Then calculate X of centroid
+            cY = int(M["m01"] / M["m00"]) #Y of centroid
             llpython[1] = cX
             llpython[2] = cY
             llpython[3] = M['m00'] # area
