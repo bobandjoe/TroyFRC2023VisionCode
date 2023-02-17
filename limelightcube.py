@@ -1,3 +1,7 @@
+'''
+LimeLight pipline for cube.
+'''
+
 import cv2 as cv
 from math import atan2, cos, sin, sqrt, pi
 import numpy as np
@@ -20,9 +24,10 @@ def runPipeline(image, llrobot):
     noise_reduction = cv.blur(thresh,(15,15))
     noise_reduction = cv.inRange(noise_reduction, 169, 255)
     
-    # Find all the contours in the thresholded image
+    # Find all the contours in the thresholded image with all contour-members of the "family" within the image and no approximation
     contours, _ = cv.findContours(noise_reduction, cv.RETR_LIST, cv.CHAIN_APPROX_NONE)
 
+    # Calculate max area by a contour, assuming the largest area --> closest object
     if not len(contours) == 0:
         max_area_contour = contours[0]
         for c in contours:
@@ -33,7 +38,10 @@ def runPipeline(image, llrobot):
 
             if area > cv.contourArea(max_area_contour):
                 max_area_contour = c
-
+        '''
+        Wiki image moments: https://en.wikipedia.org/wiki/Image_moment
+        
+        '''
         M = cv.moments(max_area_contour)
         if not M['m00'] == 0 and len(max_area_contour) > 5:
             cX = int(M["m10"] / M["m00"])
